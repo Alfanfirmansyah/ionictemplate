@@ -1,0 +1,70 @@
+<ion-menu [content]="content">
+  <ion-header>
+      <ion-toolbar>
+          <ion-list>
+              <ion-item menuClose>
+              
+                      <img src="assets/imgs/logo-lgfix.png" style="width: 60%; height: 60%;" >
+               
+                  <h2>Logbook Apps Ver 1.0
+                      <ion-icon name="ios-arrow-forward"></ion-icon>
+                  </h2>
+              </ion-item>
+          </ion-list>
+      </ion-toolbar>
+     
+  </ion-header>
+
+  <ion-content>
+      <div class="menu-title">
+          <ion-list>
+              <button ion-item menuClose (click)="homePage()">
+                  <img src="assets/imgs/ic_home.png ">
+                      Home
+              </button>
+              <button *ngIf="userMenu == 1" ion-item menuClose (click)="muserPage()">
+                <img src="assets/imgs/ic_my_account.png ">
+                    Menu User
+              </button>
+              <button ion-item menuClose (click)="mprojectPage()" *ngIf="userMenu == 1">
+                  <img src="assets/imgs/ic_categories.png ">
+                      Menu Project
+              </button>
+              <button ion-item menuClose (click)="mrecordPage()">
+                  <img src="assets/imgs/ic_my_wishlist.png ">
+                      Menu Activity Project
+              </button>
+              <button ion-item menuClose (click)="mactivityplanPage()">
+                  <img src="assets/imgs/active.png ">
+                      Menu Activity Plan
+              </button>
+              <button ion-item menuClose (click)="misuPage()">
+                <img src="assets/imgs/discuss-issue.png ">
+                    Menu Project Isu
+            </button>
+              <button ion-item menuClose (click)="reportPage()">
+                    <img src="assets/imgs/report.png ">
+                        Report Data
+                </button>
+              <button ion-item menuClose (click)="helpPage()">
+                  <img src="assets/imgs/ic_help.png ">
+                      Help Center
+              </button>
+              <button ion-item menuClose (click)="logoutapp()">
+                  <img src="assets/imgs/ic_logout.png ">
+                      Logout
+              </button>
+              <!--
+              <button ion-item menuClose (click)="reviewPage()">
+                  <img src="assets/imgs/ic_more.png ">
+                      Add Reviews
+              </button>
+      -->
+          </ion-list>
+      </div>
+  </ion-content>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage " #content swipeBackEnabled="false "></ion-nav>

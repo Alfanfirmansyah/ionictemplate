@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Detail Isu</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content >
+  <ion-grid>
+   <ion-row>
+     <ion-col col-12>
+        <form [formGroup]="FormEditData" (ngSubmit)="CloseIsu()" *ngFor="let data of Data_Record">
+           
+          <div id="notification-button">
+            <img src="https://pm.inka.co.id/a/download.php?params={{data.image}}">
+          </div>
+          <p><ion-badge color="red">{{data.project_name}}</ion-badge> <ion-badge color="red" *ngIf="data.level == 'major'" >Major</ion-badge>
+            <ion-badge color="orange" *ngIf="data.level == 'moderate'" >Moderate</ion-badge>
+            <ion-badge color="warning" *ngIf="data.level == 'minor'" >Minor</ion-badge></p>
+            <ion-item>                                     
+                <ion-label color="dark" stacked>Isu</ion-label>
+                <ion-input type="text" [value]="data.name" readonly></ion-input>                   
+            </ion-item>  
+          <ion-item>                                     
+            <ion-label color="dark" stacked>Keterangan</ion-label>
+            <ion-textarea *ngIf="data.description != '' " formControlName="keterangan"
+                           autocomplete="on" autocorrect="on" [value]="data.description" readonly></ion-textarea> 
+            <ion-textarea *ngIf="data.description == '' " formControlName="keterangan"
+                           autocomplete="on" autocorrect="on"></ion-textarea>                  
+        </ion-item>  
+            <ion-input type="hidden" formControlName="pic" [value]="user_id" readonly></ion-input> 
+            <ion-input type="hidden" formControlName="isuid" [value]="data.id" readonly></ion-input>         
+         <ion-item>
+          <ion-badge style="height: 25px" (click)="disqus(data.name,data.project_id)" color="primary" >Lihat Komentar</ion-badge> <button *ngIf="data.status == 'open'" ion-button type="submit" color="primary" [disabled]="!FormEditData.valid">Close Isu</button>
+         </ion-item>
+         
+        
+        </form>
+        
+      
+     </ion-col>
+   </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,56 @@
+<!--
+  Generated template for the OpenisupagePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+
+<ion-content padding class="bg-light">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+                  <ion-refresher-content></ion-refresher-content>
+                </ion-refresher>
+        <p><ion-badge color="ungu" class="blink_me" >Status Terealisasi</ion-badge></p>
+    <div class="select-section shadow-bottom">
+    <form [formGroup]="FormSearch" (ngSubmit)="search()">
+    <ion-row>
+            
+        <ion-col col>
+            <div class="color">
+                <ion-item>
+                    <ion-label color="dark">Choose PIC</ion-label>
+                    <ion-select [(ngModel)]="pic2" formControlName="pic">
+                        <ion-option *ngFor="let row of Data_Project" [value]="row.id">{{row.name}}</ion-option>
+                    </ion-select>
+                </ion-item>
+            </div>
+        </ion-col>
+        <ion-item>
+            <button ion-button type="submit"color="primary">Filter Data</button>
+            <ion-badge style="height: 25px" color="secondary" (click)="reset()">Clear Filter Data</ion-badge>
+          </ion-item>   
+   
+    </ion-row>
+</form> 
+</div>
+<ion-card *ngFor="let data of Data_Plan" (click)="pageDetailplan(data.id)">
+    <ion-card-header >
+      {{data.name}}
+      <ion-badge color="secondary" float-right>Terealisasi</ion-badge>
+      <hr style="color: white;
+      background-color: white;">
+  </ion-card-header>
+    <ion-card-content>
+        <ion-row>
+            <ion-col style="background-color: black" >
+               
+                <h4 class="text-white"><ion-icon name="calendar" item-start></ion-icon> Tanggal Rencana Kegiatan :</h4>               
+                <ul>
+                <li><h4 class="text-white"><span>{{data.plan_start_date | date: "dd MMMM yyyy"}} - {{data.plan_end_date | date: "dd MMMM yyyy"}}</span></h4></li>
+                </ul>
+                <h3 class="text-white"><ion-icon name="contact" item-start></ion-icon> Pic : {{data.user_name}}</h3>
+            </ion-col>
+        </ion-row>
+    </ion-card-content>
+</ion-card>
+</ion-content>

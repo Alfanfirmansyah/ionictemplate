@@ -1,0 +1,38 @@
+<!--
+  Generated template for the OpenisupagePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+
+<ion-content padding class="bg-light">
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+                  <ion-refresher-content></ion-refresher-content>
+                </ion-refresher>
+    <p><ion-badge color="secondary" class="blink_me" >Close Isu</ion-badge></p>
+  <ion-card *ngFor="let data of Data_Plan">
+    <ion-card-header>
+      Created by {{data.pic_name}}
+      <ion-badge color="secondary" float-right>Finished By {{data.finished_name}} </ion-badge>
+      <hr style="color: white;background-color: white">
+  </ion-card-header>
+  <ion-card-content>
+    <ion-row>
+        <ion-col style="background-color: black" >
+            <h4 class="text-white"><ion-icon name="pricetag" item-start></ion-icon> {{data.project_name}}</h4>               
+            <ul>
+            <li><h4 class="text-white"><span>Issue : {{data.name}}</span></h4></li>
+            </ul>
+          
+         
+              <button (click)="presentActionSheetview(data.id)" ion-button full class="bg-thime btn-round  btn-text" >Opsi Isu  <ion-icon name="checkmark-circle"></ion-icon></button>
+      
+            
+            
+        </ion-col>
+    </ion-row>
+</ion-card-content>
+</ion-card>
+  </ion-content>
+  

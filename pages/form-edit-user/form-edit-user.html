@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Edit User</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content >
+  <ion-grid>
+   <ion-row>
+     <ion-col col-12>
+        <form [formGroup]="FormEditData" (ngSubmit)="simpan()" *ngFor="let Data of Data_Project">
+            <ion-item>                                     
+                <ion-label color="primary" stacked>Masukkan Nama</ion-label>
+                <ion-input type="hidden"formControlName="id_user" [value]="Data.id"></ion-input>
+                <ion-input type="text" formControlName="nama" [value]="Data.name" ></ion-input>                   
+            </ion-item>  
+            <ion-item>      
+              <ion-label color="dark">Pilih Jenis Kelamin</ion-label>
+              <ion-select [(ngModel)]="selectedMaschine2" formControlName="jeniskelamin" multiple="false">
+                  <ion-option value="L" selected="selectedMaschine2">Laki-laki</ion-option>
+                  <ion-option value="P" selected="selectedMaschine2">Perempuan</ion-option>
+              </ion-select>
+          </ion-item>
+            <ion-item>                                     
+              <ion-label color="primary" stacked>Masukkan Nip</ion-label>
+              <ion-input type="text" formControlName="nip" [value]="Data.nip"></ion-input>                   
+          </ion-item> 
+          <ion-item>                                     
+            <ion-label color="primary" stacked>Masukkan Password</ion-label>
+            <ion-input type="text" formControlName="password" [value]="" placeholder="Masukkan password jika ingin merubah password" ></ion-input>                   
+        </ion-item>    
+        <ion-item>                                     
+          <ion-label color="primary" stacked>Masukkan Jabatan</ion-label>
+          <ion-input type="text" formControlName="jabatan" [value]="Data.position"></ion-input>                   
+      </ion-item> 
+      <ion-item>      
+        <ion-label color="primary">Pilih Project (khusus staff PM)</ion-label>
+        <ion-select [(ngModel)]="selectedMaschine" formControlName="maschine" multiple="false" (ionChange)="onChange($event)">
+            <ion-option [value]="0">Keproyekan</ion-option>
+            <ion-option *ngFor="let row of Data_Projectd,let idx = index" [value]="row.id" selected="{{(idx==0).toString()}}">{{row.name}}</ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>      
+      <ion-label color="dark">Pilih Role User</ion-label>
+      <ion-select [(ngModel)]="selectedMaschine3" formControlName="roleuser" multiple="false">
+        <ion-option *ngFor="let items of itemskeproyekan,let idx = index" [value]="items.id" selected="{{(idx==0).toString()}}">{{items.title}}</ion-option>
+      </ion-select>
+  </ion-item> 
+            <ion-item>
+              <button ion-button full type="submit" color="primary" [disabled]="!FormEditData.valid">Simpan</button>
+            </ion-item>    
+        </form>
+     </ion-col>
+   </ion-row>
+  </ion-grid>
+</ion-content>

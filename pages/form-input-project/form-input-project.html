@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Input Project</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content >
+  <ion-grid>
+   <ion-row>
+     <ion-col col-12>
+        <form [formGroup]="FormSimpanData" (ngSubmit)="simpan()">
+            <ion-item>                                     
+                <ion-label color="dark" stacked>Masukkan Project</ion-label>
+                <ion-input type="text" formControlName="nama_project"></ion-input>                   
+            </ion-item>           
+            <ion-item>
+              <button ion-button full type="submit" color="primary" [disabled]="!FormSimpanData.valid">Simpan</button>
+            </ion-item>    
+        </form>
+     </ion-col>
+   </ion-row>
+  </ion-grid>
+</ion-content>

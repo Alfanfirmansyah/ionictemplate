@@ -1,0 +1,54 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>User
+            <span float-right>
+                <ion-icon class="icon" (click)="dismiss()">
+                    <img src="assets/imgs/ic_cross.png" width="100%;">
+                </ion-icon>
+            </span>
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="bg-light">
+    <div class="your-cart bg-thime">
+        <ion-card>
+            <ion-card-content>
+                <ion-row>
+                    <ion-col col-3>
+                        <div class="img-box" *ngIf="userDetails.gender == 'L'">
+                            <img src="assets/imgs/boy.png" >
+                        </div>
+                        <div class="img-box" *ngIf="userDetails.gender == 'P'">
+                            <img src="assets/imgs/girl.png" >
+                        </div>
+                    </ion-col>
+                    <ion-col col-9>
+                        <h2><b>{{userDetails.name}}</b>
+                           
+                        </h2>
+                        <div class="rate">
+                            <div style="display: flex;" class="price-box">
+                               
+                                <div class="text-sky" [innerHTML]=""><strong>{{userDetails.position}}</strong>
+                        
+                                </div>
+                            </div>
+  
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-card-content>
+        </ion-card>
+
+
+        <ion-row class="checkout">
+            <ion-col class="warna" col-6>
+               
+            </ion-col>
+            <ion-col class="warna" col-6>
+                <button ion-button full class="bg-green btn-round btn-text btn-shadow" (click)="logout()">Logout</button>
+            </ion-col>
+        </ion-row>
+    </div>
+</ion-content>

@@ -1,0 +1,60 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>Detail Activity Plan</ion-title>
+    </ion-navbar>
+  </ion-header>
+<ion-content class="bg-light">
+<ion-card *ngFor="let data of Data_Plan">
+    <ion-card-header>
+            
+        <p class="left-side">
+            <span class="text-light">Created At : {{data.created_at | date: "dd MMMM yyyy"}}</span> 
+            <br>
+            <span class="text-light">PIC : {{data.user_name}}</span> 
+        </p> 
+    </ion-card-header>
+    <ion-card-content>
+        <ion-row>
+            <ion-col style="background-color: black">
+                <h3 class="text-light">{{data.project_name}}</h3>
+                <h4 class="text-light"><ion-icon name="pricetag" item-start></ion-icon> {{data.name}}</h4>               
+                <ul>
+                <li> <small><span class="text-light">Tanggal Rencana Kegiatan :</span></small>
+                <ul>
+                    <li><small><span class="text-light">Tanggal Awal : {{data.plan_start_date | date: "dd MMMM yyyy"}}</span></small></li>
+                    <li><small><span class="text-light">Tanggal Akhir : {{data.plan_end_date | date: "dd MMMM yyyy"}}</span></small></li>
+                </ul>
+                </li>
+                <li><small><span class="text-light">Deskripsi : {{data.description}}</span></small></li>
+               <li> <small><span class="text-light">Catatan : {{data.note}}</span></small></li>
+               
+                </ul>
+            </ion-col>
+        </ion-row>
+    </ion-card-content>
+</ion-card>
+<div *ngIf="userDetails.role_user == '001'">
+  <ion-fab bottom right edge style="margin-right: 30px;margin-bottom: 50px" *ngFor="let data2 of Data_Plan" >
+    <button ion-fab><ion-icon name="settings"></ion-icon></button>
+    <ion-fab-list side="top">
+      <button ion-fab (click)="delete(data2.id)"><ion-icon name="trash"></ion-icon></button>
+      <button ion-fab (click)="editdata(data2.id)"><ion-icon name="create"></ion-icon></button>
+      <button *ngIf="data2.status_realization == 'Rencana'" ion-fab (click)="presentActionSheet(data2.id)"><ion-icon name="checkmark-circle"></ion-icon></button>
+      <button *ngIf="data2.status_realization == 'on progress'" ion-fab (click)="presentActionSheetonprogress(data2.id)"><ion-icon name="checkmark-circle"></ion-icon></button>
+      <button *ngIf="data2.status_realization == 'terealisasi'" ion-fab (click)="presentActionSheetterealisasi(data2.id)"><ion-icon name="checkmark-circle"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+</div>
+<div *ngIf="userDetails.role_user != '001'">
+  <ion-fab bottom right edge style="margin-right: 30px;margin-bottom: 50px" *ngFor="let data2 of Data_Plan" >
+    <button ion-fab *ngIf="data2.pic == userDetails.id"><ion-icon name="settings"></ion-icon></button>
+    <ion-fab-list side="top">
+      <button ion-fab (click)="delete(data2.id)"><ion-icon name="trash"></ion-icon></button>
+      <button ion-fab (click)="editdata(data2.id)"><ion-icon name="create"></ion-icon></button>
+      <button *ngIf="data2.status_realization == 'Rencana'" ion-fab (click)="presentActionSheet(data2.id)"><ion-icon name="checkmark-circle"></ion-icon></button>
+      <button *ngIf="data2.status_realization == 'on progress'" ion-fab (click)="presentActionSheetonprogress(data2.id)"><ion-icon name="checkmark-circle"></ion-icon></button>
+      <button *ngIf="data2.status_realization == 'terealisasi'" ion-fab (click)="presentActionSheetterealisasi(data2.id)"><ion-icon name="checkmark-circle"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+</div>
+</ion-content>

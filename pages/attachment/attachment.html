@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Add Attachment</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+   <ion-row>
+     <ion-col col-12>
+      <ion-item>
+         <p style="color:#488aff">Choose Attachment</p> 
+        <button ion-button color="secondary"(click)="presentActionSheet()">Choose File</button>{{GaleriName}}
+      </ion-item>  
+      <ion-item>
+        <p style="color:#488aff">Upload Attachment</p> 
+       <button ion-button (click)="uploadGaleri()">Upload</button>
+     </ion-item>  
+      
+     </ion-col>
+   </ion-row>
+  </ion-grid>
+</ion-content>

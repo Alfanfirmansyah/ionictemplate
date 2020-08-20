@@ -1,0 +1,130 @@
+page-mrecord {
+
+  .toolbar-title-md {
+      span {
+          top: 0px;
+      }
+  }
+  h6 {
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 20px;
+      margin-top: 20px;
+      color: #444;
+  }
+  .view{
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: white !important;
+    
+  }
+  .blink_me {
+    animation: blinker 1s linear infinite;
+  }
+  
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
+  .searchbar {
+      padding: 8px;
+      border-bottom: none !important;
+      background: none !important;
+      .searchbar-input {
+          border-radius: 5px !important;
+          font-size: 1.4rem;
+          font-weight: 300;
+          line-height: 2.8rem;
+          padding: 6px 43px;
+          box-shadow: none !important;
+      }
+      .searchbar-input-container {
+          border: none !important;
+      }
+      .searchbar-search-icon {
+          left: 10px;
+          top: 10px;
+      }
+      .searchbar-input {
+          height: 3.7rem !important;
+      }
+  }
+  .list {
+      margin: 0 !important;
+  }
+  .card {
+      border-radius: 5px !important;
+      box-shadow: 0px 1px 3px rgba(10, 10, 10, 0.2);
+      background-color: #000;
+      .card-header {
+          font-size: 1.3rem;
+          color: white;
+          padding: 16px;
+          font-weight: 500;
+          padding-bottom: 8px;
+          ion-icon {
+              font-size: 1.1em;
+              color:white;
+          }
+      }
+      .card-content {
+          font-size: 1.1rem;
+          font-weight: 300;
+          &.text-light {
+              color: white !important;
+          }
+      }
+      .shadow-bottom {
+        box-shadow: 0 2px 7px 0px #b9b8b8;
+    }
+      .select-section {
+        .col {
+            padding: 0 !important;
+        }
+        .item-inner {
+            border-bottom: 0!important;
+            margin: 5px 0;
+        }
+        .size {
+            .item-inner {
+                border-right: 1px solid #dedede;
+            }
+        }
+        .label {
+            font-size: 1.3rem;
+            color: #000;
+            font-weight: 500;
+        }
+        .item-select {
+            .select {
+                padding: 0 !important;
+            }
+            ion-select {
+                max-width: 100% !important;
+                .select-text {
+                    font-size: 1.2rem !important;
+                    color: #838383;
+                    font-weight: 500;
+                }
+            }
+            .select-icon {
+                width: 15px;
+                .select-icon-inner {
+                    left: 2px !important;
+                }
+            }
+            .blink_me {
+                animation: blinker 1s linear infinite;
+              }
+              
+              @keyframes blinker {
+                50% {
+                  opacity: 0;
+                }
+              }
+        }
+        
+    }
+  }
+}

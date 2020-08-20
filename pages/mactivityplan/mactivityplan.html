@@ -1,0 +1,23 @@
+<!--
+  Generated template for the MisuPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header class="bg-thime" no-border>
+  <ion-navbar>
+      <button ion-button menuToggle>
+    <ion-icon class="menu-icon"><img src="assets/imgs/menufix.png"></ion-icon>
+  </button>
+      <ion-title><b>Menu Activity Plan</b>
+         
+      </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <super-tabs tabsPlacement="top" toolbarBackground="secondary" toolbarColor="light" indicatorColor="light"
+  (tabSelect)="onTabSelect($event)">
+  <super-tab *ngFor="let page of pages" [root]="page.pageName" [icon]="page.icon" [id]="page.id"></super-tab>
+</super-tabs>
+</ion-content>

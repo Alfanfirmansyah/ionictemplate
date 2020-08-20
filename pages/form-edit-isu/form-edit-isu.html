@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Edit Project Isu</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content >
+  <ion-grid>
+   <ion-row>
+     <ion-col col-12>
+        <form [formGroup]="FormEditData" (ngSubmit)="simpan()" *ngFor="let data of Data_Record">
+          <img *ngIf="!GetGaleriNameUpload" src="assets/imgs/addphoto.jpg" (click)="uploadimage()"  style="border:2px solid black;margin: auto;
+          display: block;">
+        <div *ngIf="GetGaleriNameUpload" id="notification-button">
+         <img src="https://pm.inka.co.id/a/download.php?params={{GetGaleriNameUpload}}">
+         <ion-badge id="notifications-badge" color="danger" (click)="hapusImage(GetGaleriNameUpload)">X</ion-badge>
+      
+       </div>
+           <ion-item *ngIf="userDetails.project_to_pm == ''">
+                
+                  <ion-label color="dark">Choose Project</ion-label>
+                  <ion-select [(ngModel)]="selectedMaschine" formControlName="maschine" multiple="false">
+                      <ion-option *ngFor="let row of Data_Project,let idx = index" [value]="row.id" selected="{{(idx==0).toString()}}">{{row.name}}</ion-option>
+                  </ion-select>
+              </ion-item>
+            <ion-input *ngIf="userDetails.project_to_pm != ''" type="hidden" formControlName="maschine" [value]="userDetails.project_to_pm"></ion-input>
+            <ion-item>                                     
+                <ion-label color="dark" stacked>Masukkan Isu</ion-label>
+                <ion-input type="text" formControlName="isu" [value]="data.name"></ion-input>                   
+            </ion-item> 
+        <ion-item>
+          <ion-label color="dark">Pilih Level Status Isu</ion-label>
+          <ion-select [(ngModel)]="selectedMaschine2" formControlName="kategori" multiple="false">
+              <ion-option selected value="major">Major</ion-option>
+                            <ion-option selected="selectedMaschine2" value="moderate">Moderate</ion-option>
+                            <ion-option selected="selectedMaschine2" value="minor">Minor</ion-option>
+          </ion-select>
+      </ion-item>  
+            <ion-input type="hidden" formControlName="pic" [value]="data.id" readonly></ion-input>      
+            <ion-input type="hidden" formControlName="image" [value]="GetGaleriNameUpload" readonly></ion-input>     
+            <ion-item>
+              <button ion-button full type="submit" color="primary" [disabled]="!FormEditData.valid">Simpan</button>
+            </ion-item>    
+        </form>
+     </ion-col>
+   </ion-row>
+  </ion-grid>
+</ion-content>

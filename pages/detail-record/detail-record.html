@@ -1,0 +1,171 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>Detail Activity Project </ion-title>
+    </ion-navbar>
+  </ion-header>
+<ion-content>
+<ion-card *ngFor="let data of Data_Record">
+    <ion-card-header> 
+        <p class="left-side">
+            <span class="text-light">Created At : {{data.created_at | date: "dd MMMM yyyy"}}</span> 
+            <br>
+            <span class="text-light">Created By : {{data.user_name}}</span> 
+        </p> 
+        <p class="right-side text-sky" *ngIf="userDetails.role_user == '001'">
+                <ion-icon  class="text-light" name="more" item-start (click)="showConfirm(data.id)"></ion-icon>
+            </p>
+            <p class="right-side text-sky" *ngIf="userDetails.role_user != '001'">
+              <ion-icon  class="text-light" name="more" item-start (click)="showConfirm(data.id)" *ngIf="data.pic == userDetails.id"></ion-icon>
+          </p>
+    </ion-card-header>
+    <ion-card-content>
+        <ion-row >
+            <ion-col style="background-color: black" >
+                <h3 class="text-light">{{data.project_name}}</h3>
+                <h4 class="text-light"><ion-icon name="pricetag" item-start class="text-light"></ion-icon> {{data.name_activity}}</h4>               
+                <ul class="text-light">
+                <li> <small><span class="text-light">Tanggal Kegiatan :</span></small>
+                <ul>
+                    <li><small><span class="text-light">Tanggal Awal : {{data.start_date | date: "dd MMMM yyyy"}}</span></small></li>
+                    <li><small><span class="text-light">Tanggal Akhir : {{data.end_date | date: "dd MMMM yyyy"}}</span></small></li>
+                </ul>
+                </li>
+                <li><h4><span class="text-light">Pembahasan : </span><span class="text-light" [innerHTML]="data.discussion"></span></h4></li>
+                <li><h4 color="dark"><span class="text-light">Tindak Lanjut : </span><span class="text-light" [innerHTML]="data.action"></span></h4></li>
+               <li> <h4><span class="text-light">Keterangan : </span><span class="text-light" [innerHTML]="data.information"></span></h4></li>
+               
+                </ul>
+      
+                <button (click)="attachment(data.id)" ion-button full class="bg-thime btn-round  btn-text" *ngIf="userDetails.role_user == '001'" >Add Attachment<ion-icon name="ios-arrow-forward"></ion-icon></button>
+                <div *ngIf="userDetails.role_user != '001'">
+                <button (click)="attachment(data.id)"  ion-button full class="bg-thime btn-round  btn-text" *ngIf="data.pic == userDetails.id" >Add Attachment<ion-icon name="ios-arrow-forward"></ion-icon></button>
+              </div>
+              </ion-col>
+        </ion-row>
+    </ion-card-content>
+</ion-card>
+<ion-card>
+    <ion-card-header>
+        <h4 class="text-light">Attachment</h4>
+    </ion-card-header>
+    <ion-card-content>
+        <ion-row class="text-light">
+            <ion-col class="text-light" *ngIf="userDetails.role_user != '001'">
+              <div *ngIf="Data_Attachment">
+                <ion-list *ngFor="let file of Data_Attachment">
+                    <ion-item *ngIf="file.format == 'pdf'" >
+                      <ion-avatar item-start>
+                        <img src="assets/imgs/pdf.png">
+                      </ion-avatar>
+                      <a (click)="download(file.attachment)"><h2>{{file.attachment}}</h2></a>
+                      <ion-icon item-end name="close-circle" (click)="presentActionSheet(file.attachment_id,file.attachment)"></ion-icon>
+                    </ion-item>
+                    <ion-item *ngIf="file.format == 'xlsx' || file.format == 'xls'" >
+                            <ion-avatar item-start>
+                              <img src="assets/imgs/xls.png">
+                            </ion-avatar>
+                            <a (click)="download(file.attachment)"><h2>{{file.attachment}}</h2></a>
+                            <ion-icon item-end name="close-circle" (click)="presentActionSheet(file.attachment_id,file.attachment)"></ion-icon>
+                          </ion-item>
+
+                          <ion-item *ngIf="file.format == 'docx' || file.format == 'doc'" >
+                                <ion-avatar item-start>
+                                  <img src="assets/imgs/doc.png">
+                                </ion-avatar>
+                                <a (click)="download(file.attachment)"><h2>{{file.attachment}}</h2></a>
+                                <ion-icon item-end name="close-circle" (click)="presentActionSheet(file.attachment_id,file.attachment)"></ion-icon>
+                              </ion-item>
+
+                              <ion-item *ngIf="file.format == 'pptx' || file.format == 'ppt' " >
+                                    <ion-avatar item-start>
+                                      <img src="assets/imgs/ppt.png">
+                                    </ion-avatar>
+                                    <a (click)="download(file.attachment)"><h2>{{file.attachment}}</h2></a>
+                                    <ion-icon item-end name="close-circle" (click)="presentActionSheet(file.attachment_id,file.attachment)"></ion-icon>
+                                  </ion-item>
+
+                              <ion-item *ngIf="file.format == 'txt'" >
+                                    <ion-avatar item-start>
+                                      <img src="assets/imgs/txt.png">
+                                    </ion-avatar>
+                                    <a (click)="download(file.attachment)"><h2>{{file.attachment}}</h2></a>
+                                    <ion-icon item-end name="close-circle" (click)="presentActionSheet(file.attachment_id,file.attachment)"></ion-icon>
+                                  </ion-item>
+
+                    <ion-item *ngIf="file.format == 'jpg' || file.format == 'jpeg' || file.format == 'png'">
+                        <ion-avatar item-start>
+                          <img src="assets/imgs/pictures.png">
+                        </ion-avatar>
+                        <a (click)="openImage(file.attachment)"><h2>{{file.attachment}}</h2></a>
+                      <ion-icon item-end name="close-circle" (click)="presentActionSheet(file.attachment_id,file.attachment)"></ion-icon>
+                    </ion-item>
+                    
+                    <hr>   
+                    </ion-list>
+                  </div>
+                  <div *ngIf="!Data_Attachment">
+<h3 class="text-b">File Not Found</h3>
+</div>
+                
+            </ion-col>
+            <ion-col class="text-light" *ngIf="userDetails.role_user == '001'">
+              <div *ngIf="Data_Attachment">
+                <ion-list *ngFor="let file of Data_Attachment">
+                    <ion-item *ngIf="file.format == 'pdf'" >
+                      <ion-avatar item-start>
+                        <img src="assets/imgs/pdf.png">
+                      </ion-avatar>
+                      <a (click)="download(file.attachment)"><h2>{{file.attachment}}</h2></a>
+                      <ion-icon item-end name="close-circle" (click)="presentActionSheet(file.attachment_id,file.attachment)"></ion-icon>
+                    </ion-item>
+                    <ion-item *ngIf="file.format == 'xlsx' || file.format == 'xls'" >
+                            <ion-avatar item-start>
+                              <img src="assets/imgs/xls.png">
+                            </ion-avatar>
+                            <a (click)="download(file.attachment)"><h2>{{file.attachment}}</h2></a>
+                            <ion-icon item-end name="close-circle" (click)="presentActionSheet(file.attachment_id,file.attachment)"></ion-icon>
+                          </ion-item>
+
+                          <ion-item *ngIf="file.format == 'docx' || file.format == 'doc'" >
+                                <ion-avatar item-start>
+                                  <img src="assets/imgs/doc.png">
+                                </ion-avatar>
+                                <a (click)="download(file.attachment)"><h2>{{file.attachment}}</h2></a>
+                                <ion-icon item-end name="close-circle" (click)="presentActionSheet(file.attachment_id,file.attachment)"></ion-icon>
+                              </ion-item>
+
+                              <ion-item *ngIf="file.format == 'pptx' || file.format == 'ppt' " >
+                                    <ion-avatar item-start>
+                                      <img src="assets/imgs/ppt.png">
+                                    </ion-avatar>
+                                    <a (click)="download(file.attachment)"><h2>{{file.attachment}}</h2></a>
+                                    <ion-icon item-end name="close-circle" (click)="presentActionSheet(file.attachment_id,file.attachment)"></ion-icon>
+                                  </ion-item>
+
+                              <ion-item *ngIf="file.format == 'txt'" >
+                                    <ion-avatar item-start>
+                                      <img src="assets/imgs/txt.png">
+                                    </ion-avatar>
+                                    <a (click)="download(file.attachment)"><h2>{{file.attachment}}</h2></a>
+                                    <ion-icon item-end name="close-circle" (click)="presentActionSheet(file.attachment_id,file.attachment)"></ion-icon>
+                                  </ion-item>
+
+                    <ion-item *ngIf="file.format == 'jpg' || file.format == 'jpeg' || file.format == 'png'">
+                        <ion-avatar item-start>
+                          <img src="assets/imgs/pictures.png">
+                        </ion-avatar>
+                        <a (click)="openImage(file.attachment)"><h2>{{file.attachment}}</h2></a>
+                      <ion-icon item-end name="close-circle" (click)="presentActionSheet(file.attachment_id,file.attachment)"></ion-icon>
+                    </ion-item>
+                    
+                    <hr>   
+                    </ion-list>
+                  </div>
+                     <div *ngIf="!Data_Attachment">
+<h3 class="text-b">File Not Found</h3>
+</div>
+            </ion-col>
+        </ion-row>
+    </ion-card-content>
+</ion-card>
+</ion-content>

@@ -1,0 +1,51 @@
+<ion-content padding>
+      <ion-grid>
+        <ion-row justify-content-center>  
+          <ion-col align-self-center size-md="6" size-lg="5" size-xs="12" >
+              <form [formGroup]="FormLogin"(ngSubmit)="login()">
+            <div text-center>
+                <h2 ion-text class="text-primary">
+                    <strong>Logbook Keproyekan Apps</strong>
+                  </h2>
+            </div>
+            <div class="logologin">
+                <img src="../assets/img/logo-lg.png"></div>
+            <div padding>
+              <ion-item>
+                  <ion-label floating>
+                      <ion-icon name="person" item-start class="text-primary"></ion-icon>
+                      Masukkan Nip
+                    </ion-label>
+                <ion-input type="number" formControlName="nip"></ion-input>
+              </ion-item>
+      
+              <ion-item>
+                  <ion-label floating>
+                      <ion-icon name="lock" item-start class="text-primary"></ion-icon>
+                      Masukkan Password
+                    </ion-label>
+                <ion-input type="password"formControlName="password"></ion-input>
+              </ion-item>
+              <p text-right ion-text color="secondary" tappable (click)="forgotPass()"><strong>Forgot Password?</strong></p>
+            </div>
+            
+      
+            <div padding>
+              <button ion-button fulltype="submit" icon-start block color="danger" [disabled]="!FormLogin.valid">
+                  <ion-icon name="log-in"></ion-icon>
+                  LOGIN
+                </button>
+            </div>
+           
+          </form>
+          </ion-col>
+       
+        </ion-row>
+      </ion-grid>
+ 
+</ion-content>
+<ion-footer>
+      <div text-center margin>
+          <u><strong ion-text color="black">Copyright @ 2019 Div. Keproyekan </strong></u>
+        </div>
+  </ion-footer>

@@ -1,0 +1,46 @@
+<!--
+  Generated template for the OpenisupagePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+
+<ion-content padding class="bg-light">
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+                  <ion-refresher-content></ion-refresher-content>
+                </ion-refresher>
+    <p><ion-badge color="red" class="blink_me" >Open Isu</ion-badge></p>
+  <ion-card *ngFor="let data of Data_Plan">
+    <ion-card-header>
+      Created by {{data.pic_name}}
+      <ion-badge color="red" float-right *ngIf="data.level == 'major'" >Major</ion-badge>
+      <ion-badge color="orange" float-right *ngIf="data.level == 'moderate'" >Moderate</ion-badge>
+      <ion-badge color="warning" float-right *ngIf="data.level == 'minor'" >Minor</ion-badge>
+      <hr style="color: white;background-color: white">
+  </ion-card-header>
+    <ion-card-content>
+        <ion-row>
+            <ion-col style="background-color: black" >
+                <h4 class="text-white"><ion-icon name="pricetag" item-start></ion-icon> {{data.project_name}}</h4>               
+                <ul>
+                <li><h4 class="text-white"><span>Issue : {{data.name}}</span></h4></li>
+                </ul>
+              
+                <div *ngIf="userDetails.role_user == '001'">
+                  <button (click)="presentActionSheet(data.id)" ion-button full class="bg-thime btn-round  btn-text" >Opsi Isu  <ion-icon name="checkmark-circle"></ion-icon></button>
+                </div>
+                <div *ngIf="userDetails.role_user != '001'">
+                  <button *ngIf="data.pic == userDetails.id" (click)="presentActionSheet(data.id)" ion-button full class="bg-thime btn-round  btn-text" >Opsi Isu  <ion-icon name="checkmark-circle"></ion-icon></button>
+                  <button *ngIf="data.pic != userDetails.id" (click)="presentActionSheetview(data.id)" ion-button full class="bg-thime btn-round  btn-text" >Opsi Isu  <ion-icon name="checkmark-circle"></ion-icon></button>
+                </div>
+                
+                
+            </ion-col>
+        </ion-row>
+    </ion-card-content>
+</ion-card>
+<ion-fab class="pulse-button" bottom right style="margin-right: 30px;margin-bottom: 20px" >
+  <button (click)="pageInput()" ion-fab><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+</ion-content>

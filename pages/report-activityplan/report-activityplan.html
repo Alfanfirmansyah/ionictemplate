@@ -1,0 +1,41 @@
+<!--
+  Generated template for the ReportIsuPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Report Activity Project Plan</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <br>
+  <h3 class="text-center">Cetak Report Data Activity Project Plan</h3>
+  <br>
+  <br>
+  <form [formGroup]="FormCetakData" (ngSubmit)="cetak()">
+  <ion-item *ngIf="userDetails.project_to_pm == ''">
+    <ion-label color="dark">Choose Project</ion-label>
+    <ion-select [(ngModel)]="selectedMaschine" formControlName="project" multiple="false">
+      <ion-option [value]="0">All</ion-option>
+        <ion-option *ngFor="let row of Data_Project" [value]="row.id">{{row.name}}</ion-option>
+    </ion-select>
+  </ion-item>
+<ion-input *ngIf="userDetails.project_to_pm != ''" type="hidden" formControlName="project" [value]="userDetails.project_to_pm"></ion-input>
+<ion-item>
+  <ion-label color="dark">Status Level Aktivitas Plan</ion-label>
+  <ion-select [(ngModel)]="selectedMaschine2" formControlName="status" multiple="false">
+      <ion-option selected value="Rencana">Rencana</ion-option>
+      <ion-option selected value="on progress">on progress</ion-option>
+      <ion-option selected value="terealisasi">terealisasi</ion-option>
+  </ion-select>
+</ion-item> 
+<ion-item>
+  <button ion-button full type="submit" color="primary" [disabled]="!FormCetakData.valid">Cetak Report</button>
+</ion-item>    
+</form>
+
+</ion-content>

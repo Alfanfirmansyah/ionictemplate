@@ -1,0 +1,101 @@
+<ion-header class="bg-thime">
+    <ion-navbar>
+        <button ion-button menuToggle>
+      <ion-icon class="menu-icon"><img src="assets/imgs/menufix.png"></ion-icon>
+    </button>
+        <ion-title><b>Activity Project</b>
+           
+        </ion-title>
+    </ion-navbar>
+   
+            
+        
+</ion-header>
+
+<ion-content class="bg-light">
+                <ion-refresher (ionRefresh)="doRefresh($event)">
+                  <ion-refresher-content pullingIcon="arrow-dropdown"
+                  pullingText="Pull to refresh"
+                  refreshingSpinner="circles"
+                  refreshingText="Refreshing..."></ion-refresher-content>
+                </ion-refresher>
+        <div class="select-section shadow-bottom">
+                <form [formGroup]="FormSearch" (ngSubmit)="search()">
+                <ion-row *ngIf="userDetails.project_to_pm == ''">
+                        
+                    <ion-col col-6 >
+                        <div class="size">
+                            <ion-item>
+                                <ion-label color="dark">Choose Project</ion-label>
+                                <ion-select [(ngModel)]="projectd" formControlName="project" interface="action-sheet">
+                                        <ion-option *ngFor="let row of Data_Project" [value]="row.id">{{row.name}}</ion-option>
+                                </ion-select>
+                            </ion-item>
+                        </div>
+                    </ion-col>
+                    <ion-col col-6>
+                        <div class="color">
+                            <ion-item>
+                                <ion-label color="dark">Choose Category</ion-label>
+                                <ion-select [(ngModel)]="kategorid" formControlName="kategori" multiple="false">
+                                  <ion-option *ngFor="let row of Data_Kategori" [value]="row.id">{{row.name}}</ion-option>
+                                </ion-select>
+                            </ion-item>
+                        </div>
+                    </ion-col>
+                    <ion-item>
+                            <button ion-button type="submit"color="primary">Filter Data</button>
+                            <ion-badge style="height: 25px" color="secondary" (click)="reset()">Clear Filter Data</ion-badge>
+                          </ion-item>   
+               
+                </ion-row>
+                <ion-row *ngIf="userDetails.project_to_pm != ''">
+                        
+                    
+                    <ion-col col-12>
+                        <div class="color">
+                            <ion-item>
+                                <ion-label color="dark">Choose Category</ion-label>
+                                <ion-select [(ngModel)]="kategorid" formControlName="kategori" multiple="false">
+                                  <ion-option *ngFor="let row of Data_Kategori" [value]="row.id">{{row.name}}</ion-option>
+                                </ion-select>
+                            </ion-item>
+                        </div>
+                    </ion-col>
+                    <ion-item>
+                            <button ion-button type="submit"color="primary">Filter Data</button>
+                            <ion-badge style="height: 25px" color="secondary" (click)="reset()">Clear Filter Data</ion-badge>
+                          </ion-item>   
+               
+                </ion-row>
+            </form> 
+            </div>
+    <p padding-left><ion-badge color="ungu" class="blink_me" >Activity Projects List</ion-badge></p>
+    
+    <ion-card *ngFor="let data of Data_Record | slice:0:slice" >
+        <ion-card-header class="text-light">
+            <ion-icon name="ios-eye-outline" float-right (click)="viewuser(data.id)"> {{data.viewed}} views </ion-icon>
+            <hr class="text-light">
+            {{data.name_activity}}
+           
+            
+        </ion-card-header>
+        <ion-card-content class="text-light" (click)="pageDetail(data.id)">
+                <ion-icon name="pricetag" item-start (click)="pageDetail(data.id)"></ion-icon>
+                {{data.project_name}}
+                <br><ion-icon name="calendar" item-start (click)="pageDetail(data.id)"></ion-icon>
+                Created At {{data.created_at | date: "dd MMMM yyyy"}}
+                <br><ion-icon name="contact" item-start (click)="pageDetail(data.id)"></ion-icon>
+                Created By {{data.name}}
+                <ion-badge color="gold" style="width: 70px;" float-right (click)="pageDetail(data.id)">{{data.category_name}}</ion-badge>
+        </ion-card-content>
+    </ion-card>
+<ion-fab class="pulse-button" bottom right style="margin-right: 30px;margin-bottom: 20px" >
+            <button (click)="pageInput()" ion-fab><ion-icon name="add"></ion-icon></button>
+            </ion-fab>
+
+            <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)">
+                <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+                </ion-infinite-scroll-content>
+              </ion-infinite-scroll>
+</ion-content>

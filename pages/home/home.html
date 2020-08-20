@@ -1,0 +1,67 @@
+<ion-header class="bg-thime">
+    <ion-navbar>
+        <button ion-button menuToggle style="display: block !important;">
+            <ion-icon class="menu-icon">
+                <img src="assets/imgs/menufix.png">
+            </ion-icon>
+        </button>
+        <ion-title>
+            <B>LOGBOOK APP</B>
+            <span float-right> <span style="margin-right:15px; margin-top: 10px;"><a style="text-decoration: none; color:white" (click)="logout()"><u>Hai {{userDetails.name}}</u></a></span>
+                <ion-icon class="icon" (click)="logout()">
+                    <img src="assets/imgs/ic_my_account.png" width="100%;">
+                </ion-icon>
+            </span>
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="bg-light">
+    <ion-slides autoplay="5000" loop="true" speed="3000" pager>
+        <ion-slide>
+            <img src="assets/imgs/bg.png" class="slide-image" (click)="categoryPage(slide.catObj)" />
+            <div class="banner-text">
+                <p [innerHTML]="">Produk</p>
+                <small [innerHTML]="">Kereta Rel Diesel Elektrik (KRDE)</small>
+                <h2 class="slide-title" [innerHTML]="">@INKA PROJECT</h2>
+            </div> 
+        </ion-slide>
+        <ion-slide>
+            <img src="assets/imgs/bg2.png" class="slide-image" (click)="categoryPage(slide.catObj)" />
+            <div class="banner-text">
+                <p [innerHTML]="">Produk</p>
+                <small [innerHTML]="">Kereta Rel Listrik (KRL)</small>
+                <h2 class="slide-title" [innerHTML]="">@INKA PROJECT</h2>
+            </div> 
+        </ion-slide>
+    </ion-slides>
+
+    <p><ion-badge color="ungu" class="blink_me">Latest Activity Projects</ion-badge>
+        <small class="bg-thime btn-round text-white" float-right (click)="viewall()">View all</small>
+    </p>
+    <ion-list>
+        <ion-row>
+            <ion-card *ngFor="let data of Data_Record">
+                <ion-card-header>
+                    <ion-icon name="ios-eye-outline" float-right (click)="viewuser(data.id)"> {{data.viewed}} views </ion-icon>
+                    <hr class="text-light">
+                    {{data.name_activity}}
+                    
+                </ion-card-header>
+                <ion-card-content class="text-light" (click)="pageDetail(data.id)">
+                        <ion-icon name="pricetag" item-start></ion-icon>
+                        {{data.project_name}}
+                        <br><ion-icon name="calendar" item-start></ion-icon>
+                        Created At {{data.created_at | date: "dd MMMM yyyy"}}
+                        <br><ion-icon name="contact" item-start></ion-icon>
+                        Created By {{data.user_name}}
+                        <ion-badge color="gold" style="width: 70px;" float-right >{{data.category_name}}</ion-badge>
+                </ion-card-content>
+            </ion-card>
+                
+            
+            
+        </ion-row>
+    </ion-list>
+    
+</ion-content>

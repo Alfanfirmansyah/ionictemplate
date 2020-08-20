@@ -1,0 +1,28 @@
+<ion-header class="bg-thime">
+  <ion-navbar>
+      <button ion-button menuToggle>
+    <ion-icon class="menu-icon"><img src="assets/imgs/menufix.png"></ion-icon>
+  </button>
+      <ion-title><b>Help Center</b>
+         
+      </ion-title>
+  </ion-navbar>
+ 
+  <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="setFilteredItems($event)"></ion-searchbar>
+      
+</ion-header>
+
+<ion-content class="bg-light">
+  <h6 padding-left>FAQ</h6>
+  <ion-card *ngFor="let item of data">
+      <ion-card-header text-wrap>
+          {{item.label}}
+          <ion-icon name="ios-arrow-forward-outline" float-right></ion-icon>
+      </ion-card-header>
+      <ion-card-content class="text-light">
+         {{item.name}}
+      </ion-card-content>
+  </ion-card>
+
+  
+</ion-content>

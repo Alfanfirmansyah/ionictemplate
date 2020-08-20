@@ -1,0 +1,24 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>Edit Project</ion-title>
+    </ion-navbar>
+  </ion-header>
+  <ion-content >
+    <ion-grid>
+     <ion-row>
+       <ion-col col-12>
+          <form [formGroup]="FormEditData" (ngSubmit)="simpan()" *ngFor="let Data of Data_Project">
+              <ion-item>  
+                  <ion-input type="hidden"formControlName="id_project" [value]="Data.id"></ion-input>                                    
+                  <ion-label color="dark"stacked>Nama Project</ion-label>
+                  <ion-input type="text"formControlName="nama_project" [value]="Data.name"></ion-input>                 
+              </ion-item>  
+             
+              <ion-item>
+                <button ion-button full type="submit"color="primary">Simpan</button>
+              </ion-item>    
+          </form>
+       </ion-col>
+     </ion-row>
+    </ion-grid>
+  </ion-content>
